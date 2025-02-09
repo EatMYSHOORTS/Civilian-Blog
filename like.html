@@ -36,17 +36,28 @@
         }
         .content {
             background-color: #af9f0d;
-            margin: 2rem auto;
-            padding: 1rem;
-            max-width: 800px;
-            border-radius: 10px;
-            position: relative;
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 800px;
+    height: 300px; /* Fixed height for uniform size */
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden; /* Prevent content from exceeding the fixed height */
+    text-overflow: ellipsis; /* Adds ellipsis to truncated text */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Align the reaction buttons and content */
         }
         .content h2 {
             color: white;
         }
         .content p {
             font-family: 'Abadi Extra Light';
+            overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis to truncated text */
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Limit to 5 lines */
+    -webkit-box-orient: vertical;
         }
         .content img {
             max-width: 100%;
