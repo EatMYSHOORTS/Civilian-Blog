@@ -154,7 +154,7 @@
             const dislikeCountElement = content.querySelector('.dislike-count');
 
             likeButton.addEventListener('click', () => {
-                let likeCount = parseInt(localStorage.getItem(`like-${contentId}`) || 0);
+                let likeCount = parseInt(localStorage.getItem(`like-${contentId}`) || 400);
                 likeCount++;
                 localStorage.setItem(`like-${contentId}`, likeCount);
                 likeCountElement.textContent = likeCount;
