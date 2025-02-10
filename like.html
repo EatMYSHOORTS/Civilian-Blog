@@ -138,7 +138,7 @@
             const likeCountElement = content.querySelector('.like-count');
             const dislikeCountElement = content.querySelector('.dislike-count');
             
-            const likeCount = localStorage.getItem(`like-${contentId}`) || 400;
+            const likeCount = localStorage.getItem(`like-${contentId}`) || 0;
             const dislikeCount = localStorage.getItem(`dislike-${contentId}`) || 0;
 
             likeCountElement.textContent = likeCount;
