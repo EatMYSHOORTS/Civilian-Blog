@@ -6,39 +6,87 @@
     <title>Loading...</title>
     <style>
         body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: black;
+            color: lime;
+            text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
         }
-        .loading-container {
+        #loading-screen {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid white;
-            border-top: 5px solid gray;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-top: 20px;
+        #loading-message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        #countdown {
+            font-size: 1.2rem;
+        }
+        #content {
+            display: none; /* Initially hidden */
+            background-color: #c4ec13;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: left;
+            width: 90%;
+            max-width: 600px;
+        }
+        .content img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .reaction-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 10px;
+        }
+        .reaction-buttons button {
+            background-color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+            #content {
+                width: 95%;
+            }
         }
     </style>
-    <script>
-        let timeLeft = 5; // Change this to the desired loading time in seconds
+</head>
+<body>
 
-        function updateMessage() {
-            const messages = [
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <p id="loading-message">Initializing...</p>
+        <p id="countdown">Redirecting in <span id="timer">5</span> seconds...</p>
+    </div>
+
+    <!-- Actual Page Content (Hidden Initially) -->
+    <div id="content">
+        <h2>Blog 2 - 9 February 2025</h2>
+        <p><b>I have successfully made it into the facility. Me and my friend have made it to the Core Control of the Nuclear Blast Testing Facility.</b></p>
+        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Core Control Screenshot">
+        <div class="reaction-buttons">
+            <button class="like-button">👍 <span class="like-count">0</span></button>
+            <button class="dislike-button">👎 <span class="dislike-count">0</span></button>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 120; // Change the number of seconds
+        const messages = [
             "Loading non-essential cookies... They taste digital.",
             "Generating infinite loops... Just kidding (or am I?).",
             "Adjusting the flux capacitor... Almost there!",
@@ -55,27 +103,31 @@
             "Turning the internet off and on again... Hold tight!",
             "Bribing AI overlords... Success! (For now...)"
         ];
-        
+
         function updateMessage() {
             let messageIndex = Math.floor(Math.random() * messages.length);
             document.getElementById("loading-message").textContent = messages[messageIndex];
-        
+
             if (timeLeft > 0) {
                 timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
                 setTimeout(updateMessage, 1000);
             } else {
-                window.location.href = "./blog.html"; // Change this to your page
+                document.getElementById("loading-screen").style.display = "none";
+                document.getElementById("content").style.display = "block";
             }
         }
-    }
-        window.onload = updateMessage;
+
+        updateMessage();
+
+        // Like/Dislike Functionality
+        document.querySelectorAll('.reaction-buttons button').forEach(button => {
+            button.addEventListener('click', () => {
+                let countSpan = button.querySelector("span");
+                let count = parseInt(countSpan.textContent);
+                countSpan.textContent = count + 1;
+            });
+        });
     </script>
-</head>
-<body>
-    <div class="loading-container">
-        <h1>Loading...</h1>
-        <div class="spinner"></div>
-        <p id="loading-message"></p>
-    </div>
 </body>
 </html>
