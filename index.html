@@ -35,17 +35,47 @@
         }
     </style>
     <script>
-        // Redirect after 3 seconds (3000ms)
-        setTimeout(() => {
-            window.location.href = "./blog.html"; // Change this to your actual destination
-        }, 40000);
+        let timeLeft = 5; // Change this to the desired loading time in seconds
+
+        function updateMessage() {
+            const messages = [
+            "Loading non-essential cookies... They taste digital.",
+            "Generating infinite loops... Just kidding (or am I?).",
+            "Adjusting the flux capacitor... Almost there!",
+            "Debugging reality... This might take a while.",
+            "Compiling bad life choices... Whoops, too many errors!",
+            "Charging electrons... Almost positive this will work.",
+            "Fetching coffee for the server... Please hold.",
+            "Defragmenting the universe... This may take a few billion years.",
+            "Calculating the meaning of life... 42!",
+            "Downloading extra RAM... Wait, that’s not how it works?",
+            "Assembling pixels... Some assembly required.",
+            "Reversing entropy... Please wait.",
+            "Initiating dance-off with the CPU... Almost done.",
+            "Turning the internet off and on again... Hold tight!",
+            "Bribing AI overlords... Success! (For now...)"
+        ];
+        
+        function updateMessage() {
+            let messageIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById("loading-message").textContent = messages[messageIndex];
+        
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateMessage, 1000);
+            } else {
+                window.location.href = "./blog.html"; // Change this to your page
+            }
+        }
+    }
+        window.onload = updateMessage;
     </script>
 </head>
 <body>
     <div class="loading-container">
         <h1>Loading...</h1>
         <div class="spinner"></div>
-        <p>Please wait while we redirect you.</p>
+        <p id="loading-message">Please wait...</p>
     </div>
 </body>
 </html>
