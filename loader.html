@@ -358,5 +358,23 @@
         
         loadMessage();
     </script>
+    <script>
+    function scrollToBottom() {
+        terminal.scrollTop = messages.scrollHeight;
+    }
+    
+    // Scroll to bottom on page load
+    window.onload = function () {
+        scrollToBottom();
+    };
+    
+    // Optional: Call `scrollToBottom()` whenever new messages are added
+    function addMessage(text) {
+        let newMessage = document.createElement("terminal");
+        newMessage.textContent = text;
+        messages.appendChild(newMessage);
+        scrollToBottom();
+    }
+</script>    
 </body>
 </html>
