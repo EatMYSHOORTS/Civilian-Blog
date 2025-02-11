@@ -1,95 +1,51 @@
 <!DOCTYPE html>
-<html lang="en-NZ">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Da Civilian Blog</title>
+    <title>Loading...</title>
     <style>
         body {
-            font-family: 'Agency FB';
-            margin: 0;
-            background-color: #b8d515;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .loading-container {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-        }
-        header {
-            background: linear-gradient(to right, red, orange, yellow, green, blue);
-            color: black;
-            padding: 1rem;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-family: 'Agency FB';
         }
-        header nav {
-            display: flex;
-            gap: 1rem;
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid white;
+            border-top: 5px solid gray;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
         }
-        header nav a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-        .content {
-            background-color: #e69e0e;
-            margin: 2rem auto;
-            padding: 1rem;
-            max-width: 800px;
-            border-radius: 10px;
-            flex-grow: 1;
-        }
-        .content h2 {
-            color: white;
-        }
-        .content p {
-            color:white;
-            font-family: 'Abadi Extra Light';
-        }
-        .content img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-        footer {
-            background-color: #125512;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            font-family: 'Agency FB';
-            margin-top: auto;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
+    <script>
+        // Redirect after 3 seconds (3000ms)
+        setTimeout(() => {
+            window.location.href = "./blog.html"; // Change this to your actual destination
+        }, 3000);
+    </script>
 </head>
 <body>
-    <header>
-        <div>Da Civilian Blog: where media comes to life</div>
-        <nav>
-            <a href="./index.html">Home</a>
-            <a href="https://nbtf.vercel.app">NBTF</a>
-            <a href="mailto://cbgames.xyz@gmail.com">Contact</a>
-            <a href="./404.html">News</a>
-        </nav>
-    </header>
-
-    <div class="content">
-        <h2>Blog 2 - 9 February 2025</h2>
-        <p>I have successfully made it into the facility. <br> Me and my friend have made it to the Core Control of the Nuclear Blast Testing Facility.</p>
-        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Core Control Screenshot">
+    <div class="loading-container">
+        <h1>Loading...</h1>
+        <div class="spinner"></div>
+        <p>Please wait while we redirect you.</p>
     </div>
-
-    <div class="content">
-        <h2>Blog 2 - 9 February 2025</h2>
-        <p>I have successfully made it into the facility. Me and my friend have made it to the Core Control of the Nuclear Blast Testing Facility.</p>
-        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Core Control Screenshot">
-    </div>
-
-    <footer>
-        <p>Where media comes to Life<br>
-        Nuclear Blast Testing Facility<br>
-        Contact: cbgames.xyz@gmail.com</p>
-    </footer>
 </body>
 </html>

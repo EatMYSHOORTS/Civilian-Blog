@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Da Civilian Blog</title>
+    <style>
+        /* Default Desktop Styles */
+        body {
+            font-family: 'Agency FB', sans-serif;
+            margin: 0;
+            background-color: #c4ec13;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(to right, red, orange, yellow, green, blue);
+            color: black;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header nav {
+            display: flex;
+            gap: 1rem;
+        }
+        header nav a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .content {
+            background-color: #af9f0d;
+            margin: 2rem auto;
+            padding: 1rem;
+            max-width: 800px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .content h2 {
+            color: white;
+            font-size: 1.5rem;
+        }
+        .content p {
+            margin: 1rem 0;
+            font-family: 'Abadi Extra Light', sans-serif;
+            color: white;
+        }
+        .content img {
+            margin-top: 1rem;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .reaction-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+        .reaction-buttons button {
+            background-color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #125512;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        /* Mobile Styles */
+        .mobile-header {
+            flex-direction: column;
+            text-align: center;
+        }
+        .mobile-content {
+            margin: 1rem;
+            max-width: 95%;
+            padding: 0.8rem;
+        }
+        .mobile-content h2 {
+            font-size: 1.2rem;
+        }
+        .mobile-content p {
+            font-size: 0.9rem;
+        }
+        .mobile-reaction-buttons {
+            font-size: 0.9rem;
+        }
+        .mobile-footer {
+            font-size: 0.85rem;
+            padding: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div>Da Civilian Blog: 
+            where media comes to life</div>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="https://nbtf.vercel.app">NBTF</a>
+            <a href="mailto://cbgames.xyz@gmail.com">Contact</a>
+            <a href="./404.html">News</a>
+        </nav>
+    </header>
+
+    <div class="content" data-id="1">
+        <h2>Blog 1 - 9 February 2025</h2>
+        <p><b>I have successfully made it into the facility. Me and my friend have made it to the Core Control of the Nuclear Blast Testing Facility.</b></p>
+        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Core Control Screenshot">
+        <div class="reaction-buttons">
+            <button class="like-button">👍 <span class="like-count">15</span></button>
+            <button class="dislike-button">👎 <span class="dislike-count">2</span></button>
+        </div>
+    </div>
+
+    <div class="content" data-id="2">
+        <h2>Blog 2 - 9 February 2025</h2>
+        <p><b>Our journey into the facility continues. We've encountered unexpected challenges!</b></p>
+        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Facility Progress">
+        <div class="reaction-buttons">
+            <button class="like-button">👍 <span class="like-count">0</span></button>
+            <button class="dislike-button">👎 <span class="dislike-count">0</span></button>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <p>Where media comes to Life<br>
+        Nuclear Blast Testing Facility<br>
+        Contact: cbgames.xyz@gmail.com</p>
+    </footer>
+
+    <script>
+        // Check if the user is on a mobile device
+        function isMobile() {
+            return window.innerWidth <= 600; // Define a mobile screen width threshold
+        }
+
+        // Apply mobile styles if the device is mobile
+        function applyMobileStyles() {
+            if (isMobile()) {
+                // Update header styles
+                const header = document.getElementById('header');
+                header.classList.add('mobile-header');
+
+                // Update content styles
+                document.querySelectorAll('.content').forEach(content => {
+                    content.classList.add('mobile-content');
+                });
+
+                // Update reaction button styles
+                document.querySelectorAll('.reaction-buttons').forEach(buttonGroup => {
+                    buttonGroup.classList.add('mobile-reaction-buttons');
+                });
+
+                // Update footer styles
+                const footer = document.getElementById('footer');
+                footer.classList.add('mobile-footer');
+            }
+        }
+
+        // Initialize reaction counts from localStorage
+        document.querySelectorAll('.content').forEach(content => {
+            const contentId = content.getAttribute('data-id');
+            const likeCountElement = content.querySelector('.like-count');
+            const dislikeCountElement = content.querySelector('.dislike-count');
+
+            const likeCount = localStorage.getItem(`like-${contentId}`) || 0;
+            const dislikeCount = localStorage.getItem(`dislike-${contentId}`) || 0;
+
+            likeCountElement.textContent = likeCount;
+            dislikeCountElement.textContent = dislikeCount;
+        });
+
+        // Add event listeners to buttons
+        document.querySelectorAll('.content').forEach(content => {
+            const contentId = content.getAttribute('data-id');
+            const likeButton = content.querySelector('.like-button');
+            const dislikeButton = content.querySelector('.dislike-button');
+            const likeCountElement = content.querySelector('.like-count');
+            const dislikeCountElement = content.querySelector('.dislike-count');
+
+            likeButton.addEventListener('click', () => {
+                let likeCount = parseInt(localStorage.getItem(`like-${contentId}`) || 0);
+                likeCount++;
+                localStorage.setItem(`like-${contentId}`, likeCount);
+                likeCountElement.textContent = likeCount;
+            });
+
+            dislikeButton.addEventListener('click', () => {
+                let dislikeCount = parseInt(localStorage.getItem(`dislike-${contentId}`) || 0);
+                dislikeCount++;
+                localStorage.setItem(`dislike-${contentId}`, dislikeCount);
+                dislikeCountElement.textContent = dislikeCount;
+            });
+        });
+
+        // Run the function on page load and when resizing the window
+        window.addEventListener('load', applyMobileStyles);
+        window.addEventListener('resize', applyMobileStyles);
+    </script>
+</body>
+</html>
