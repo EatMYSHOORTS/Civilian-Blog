@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>da Civilian Blog</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: black;
+            color: lime;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #loading-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #loading-message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        #countdown {
+            font-size: 1.2rem;
+        }
+        #content {
+            display: none; /* Initially hidden */
+            background-color: #c4ec13;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: left;
+            width: 90%;
+            max-width: 600px;
+        }
+        .content img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .reaction-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 10px;
+        }
+        .reaction-buttons button {
+            background-color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+            #content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <p id="loading-message">Initializing...</p>
+        <p id="countdown">Estimated Loading Time: <span id="timer">5</span> seconds...</p>
+    </div>
+
+    <!-- Actual Page Content (Hidden Initially) -->
+    <div id="content">
+        <h2>Blog 2 - 9 February 2025</h2>
+        <p><b>I have successfully made it into the facility. Me and my friend have made it to the Core Control of the Nuclear Blast Testing Facility.</b></p>
+        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Core Control Screenshot">
+        <div class="reaction-buttons">
+            <button class="like-button">👍 <span class="like-count">0</span></button>
+            <button class="dislike-button">👎 <span class="dislike-count">0</span></button>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 2; // Change the number of seconds
+        const messages = [
+    "Loading non-essential cookies... They taste digital.",
+    "Generating infinite loops... Just kidding (or am I?).",
+    "Adjusting the flux capacitor... Almost there!",
+    "Debugging reality... This might take a while.",
+    "Compiling bad life choices... Whoops, too many errors!",
+    "Charging electrons... Almost positive this will work.",
+    "Fetching coffee for the server... Please hold.",
+    "Defragmenting the universe... This may take a few billion years.",
+    "Calculating the meaning of life... 42!",
+    "Downloading extra RAM... Wait, that’s not how it works?",
+    "Assembling pixels... Some assembly required.",
+    "Reversing entropy... Please wait.",
+    "Initiating dance-off with the CPU... Almost done.",
+    "Turning the internet off and on again... Hold tight!",
+    "Bribing AI overlords... Success! (For now...)",
+    "Reticulating splines... Whatever that means.",
+    "Calibrating time-space continuum... Almost stabilized.",
+    "Patching the matrix... Blue pill or red pill?",
+    "Teaching AI how to love... Not going well.",
+    "Feeding the hamster that powers the server... It's hungry.",
+    "Hiring more pixels for better resolution...",
+    "Locating missing semicolons... Programmers know the pain.",
+    "Decompressing compressed air... Please wait.",
+    "Launching rockets... Where to? No idea.",
+    "Converting WiFi signals into good vibes... Stay tuned.",
+    "Extracting digital coffee... This might take a while.",
+    "Processing unprocessed cheese... Almost melted.",
+    "Convincing the CPU to work overtime...",
+    "Optimizing the optimization process...",
+    "Untangling quantum spaghetti...",
+    "Rewriting history... Just a few more edits.",
+    "Powering up the lasers... Pew pew!",
+    "Looking for Schrödinger’s cat... It’s both here and not here.",
+    "Filling the void with artificial intelligence...",
+    "Interpreting cryptic error messages...",
+    "Upgrading server consciousness... Don't panic.",
+    "Polishing pixels... They need to shine!",
+    "Swapping zeros and ones for better performance...",
+    "Calling tech support... They put us on hold.",
+    "Randomizing randomness... This will take a while.",
+    "Waiting for the internet to catch up...",
+    "Encrypting secret messages... Shhh!",
+    "Brewing data tea... Would you like some?",
+    "Herding electrons into a straight line...",
+    "Formatting the hard drive... Wait, what?",
+    "Inserting plot twists... Prepare for surprises!",
+    "Simulating the simulation... Who's controlling who?",
+    "Outsourcing to Skynet... Good idea?",
+    "Distilling reality into 1s and 0s...",
+    "Analyzing previous analysis...",
+    "Unlocking secrets of the universe... Almost there.",
+    "Redistributing server load... Mostly to you.",
+    "Synchronizing with alien technology...",
+    "Translating binary into ancient runes...",
+    "Compiling unnecessary compiler warnings...",
+    "Scaring away cyber gremlins...",
+    "Cross-checking alternative dimensions...",
+    "Auto-correcting reality... You’re welcome.",
+    "Reversing polarity of the neutron flow...",
+    "Waiting for the server to wake up...",
+    "Rewriting Shakespeare using AI...",
+    "Thinking up new errors to confuse users...",
+    "Starting the world's slowest speedrun...",
+    "Asking the internet for permission to proceed...",
+    "Debugging the debugger...",
+    "Processing... just because it sounds important.",
+    "Compressing the uncompressable...",
+    "Launching into the void... No, wait, abort!",
+    "Injecting caffeine into the mainframe...",
+    "Making the progress bar feel useful...",
+    "Mining for non-existent bitcoins...",
+    "Consulting the magic 8-ball...",
+    "Erasing the previous erasure...",
+    "Redefining undefined variables...",
+    "Charging wireless cables...",
+    "Detecting sarcasm... No results found.",
+    "Unpacking Schrödinger's surprise box...",
+    "Solving Rubik’s cubes just for fun...",
+    "Calibrating warp drive... Engage!",
+    "Unleashing the power of friendship...",
+    "Testing if the server is self-aware...",
+    "Bringing balance to the Force...",
+    "Reciting the digits of pi... 3.14159...",
+    "Deploying unicorns... Rainbows loading...",
+    "Consulting the wise old CPU...",
+    "Synchronizing with alternate timelines...",
+    "Applying sunscreen to the servers...",
+    "Charging up the anti-procrastination beam...",
+    "Duct-taping the cloud infrastructure...",
+    "Waiting for AI to take over the world...",
+    "Measuring the speed of darkness...",
+    "Unraveling the mysteries of the spaghetti code...",
+    "Charging flux capacitor... 88% complete.",
+    "Collecting user data to sell to aliens...",
+    "Analyzing algorithmic conspiracy theories...",
+    "Bargaining with the loading bar...",
+    "Teaching AI sarcasm... Oh, this should be fun.",
+    "Consulting the prophecy for answers...",
+    "Waiting for the progress bar to catch up...",
+    "Debugging a bug in the debugging process...",
+    "Warming up the internet hamsters...",
+    "Recharging AI with a 9V battery...",
+    "Deploying an army of digital ants...",
+    "Scanning for life in the void...",
+    "Telling servers a bedtime story...",
+    "Untangling earphone wires... This will take a while.",
+    "Dialing up to the internet... Please wait.",
+    "Asking the toaster for permission...",
+    "Making the numbers add up... Eventually.",
+    "Refactoring spaghetti code... Send help.",
+    "Adjusting quantum probabilities...",
+    "Summoning Clippy for assistance... No response.",
+    "Googling how to fix this...",
+    "Running out of ideas for loading messages...",
+    "Still loading... You could probably take a nap.",
+    "We're stuck in a time loop... Wait, did I say that already?",
+    "Deciphering ancient JavaScript errors...",
+    "Practicing telepathy with the server...",
+    "Convincing reality to cooperate...",
+    "Firing up the sarcasm module...",
+    "Procrastinating... Will load soon. Maybe.",
+    "Calibrating the reactor... Please stand behind a reinforced wall.",
+    "Charging the AI server with a bike dynamo... Keep pedaling!",
+    "Adjusting uranium enrichment levels... Don’t worry, it’s fine.",
+    "Filling the cooling rods... Hopefully, they don’t overheat this time.",
+    "Running AI servers on excess nuclear waste... Efficiency!",
+    "Powering up the blast chamber... Shields recommended.",
+    "Simulating a safe explosion... As safe as an explosion can be.",
+    "Telling the AI not to launch... Again.",
+    "Installing extra lead walls... Just in case.",
+    "Pumping more coolant into the core... What could go wrong?",
+    "Bribing the Geiger counter to stay silent...",
+    "Testing if fallout can power AI... Results inconclusive.",
+    "Deploying radiation-proof hamsters to generate electricity...",
+    "Setting up the AI’s secret underground bunker...",
+    "Redirecting all power to NBTF’s snack vending machine...",
+    "Checking if explosions can power data centers...",
+    "Asking the reactor core to be nice today...",
+    "Converting gamma rays into progress bars...",
+    "Hiding nuclear launch codes from the AI...",
+    "Reversing nuclear meltdown... Stand by.",
+    "Hand-cranking the fusion reactor... Almost there.",
+    "Negotiating with atoms to stay split...",
+    "Deploying containment protocols... Wait, why?",
+    "Testing if AI can withstand 10,000 rads...",
+    "Asking if we *really* need this much radiation...",
+    "Optimizing uranium supply chains... Ethics pending.",
+    "Watching a suspicious red light blink... Should we worry?",
+    "Pressing big red buttons... It’s fine.",
+    "Loading top-secret NBTF files... You saw nothing.",
+    "Balancing AI server power between fission and bicycle dynamos...",
+    "Redirecting steam pressure to nuclear-powered coffee machines...",
+    "Simulating Chernobyl but with *good* decisions...",
+    "Exploring AI-powered nuclear waste disposal... Smells funny.",
+    "Checking reactor integrity... Ignore the alarms.",
+    "Calculating safe detonation distance... Whoops.",
+    "Using leftover bomb heat to toast marshmallows...",
+    "Explaining nuclear safety to a chatbot... It's not listening.",
+    "Mixing uranium with energy drinks... More power!",
+    "Trying to turn a nuclear warhead into a space heater...",
+    "Convincing AI that detonating is a bad idea...",
+    "Training AI to play chess instead of controlling missiles...",
+    "Experimenting with AI-powered missile guidance... Uh oh.",
+    "Recycling old warheads into LED lightbulbs...",
+    "Finding out if explosions can mine Bitcoin...",
+    "Refueling the AI core with unstable isotopes...",
+    "Swapping out old plutonium for a fresher batch...",
+    "Exploring whether nuclear fusion can power Twitter...",
+    "Teaching AI the difference between 'test' and 'launch'...",
+    "Redirecting nuclear waste into an AI-powered smoothie...",
+    "Convincing AI that gamma rays aren’t healthy...",
+    "Converting nuclear radiation into motivational posters...",
+    "Hoping the AI doesn’t gain sentience... Again.",
+    "Building a firewall made of lead... Literally.",
+    "Debugging a meltdown... Might take a while.",
+    "Reticulating nuclear splines... Definitely necessary.",
+    "Asking the AI if it's seen the Terminator movies...",
+    "Testing how many explosions a data center can withstand...",
+    "Giving the AI a Geiger counter... It’s *very* unhappy.",
+    "Launching a controlled explosion... 'Controlled' is subjective.",
+    "Turning off safety protocols... Wait, no, wrong button.",
+    "Adding more duct tape to the nuclear core...",
+    "Supercharging the AI with highly enriched uranium...",
+    "Testing how much radiation a server can tolerate...",
+    "Asking if plutonium can double as a power bank...",
+    "Converting nuclear warheads into AI training datasets...",
+    "Investigating if gamma radiation makes AI smarter...",
+    "Rerouting all power to the glowing green button...",
+    "Realizing that AI doesn't need radiation shielding... Or does it?",
+    "Warning: Core temperature rising... But it's fine. Probably.",
+    "Making the AI sign a nuclear non-proliferation treaty...",
+    "Convincing the AI that 'delete all' is not an acceptable command...",
+    "Creating AI-powered radiation suits... Testing in progress.",
+    "Wondering why the AI is glowing... That’s new.",
+    "Powering AI with unstable isotopes... Performance may vary.",
+    "Turning nuclear fallout into a WiFi signal...",
+    "Debugging an AI that wants to build its own reactor...",
+    "Figuring out how much uranium is 'too much' for an AI...",
+    "Feeding the AI reactor snacks... It prefers isotopes.",
+    "Asking the AI to define 'acceptable risk'...",
+    "Powering down unnecessary explosions...",
+    "Balancing the AI's power between nuclear cores and hamster wheels...",
+    "Testing the AI’s ability to survive EMP blasts...",
+    "Checking if AI understands the difference between 'test' and 'boom'...",
+    "Rebuilding the facility after *another* test gone wrong...",
+    "Realizing that AI should not have control over missile silos...",
+    "Attempting to extract useful energy from nuclear-powered memes...",
+    "Exploring quantum computing via high-energy radiation...",
+    "Redirecting waste heat to make popcorn...",
+    "Shutting down unauthorized AI-controlled reactors...",
+    "Making sure the AI doesn’t start a nuclear cold war...",
+    "Building the world's first plutonium-powered supercomputer...",
+    "Training AI to think about *not* causing explosions...",
+    "Synchronizing radiation levels with industry standards...",
+    "Disarming AI-controlled nuclear warheads... Slowly...",
+    "Wondering why the AI keeps whispering 'detonate'...",
+    "Feeding reactor fuel rods into the server... Faster speeds expected.",
+    "Checking if a nuclear core can be a gaming PC...",
+    "Testing AI resistance to atomic vaporization...",
+    "Hoping the AI doesn't launch something *again*...",
+    "Optimizing blast radius calculations...",
+    "Using nuclear power to load this page faster...",
+    "Starting countdown... Just kidding. Maybe.",
+    "Teleporting... Please wait... Forever...",
+    "Loading: Your avatar has fallen into the void.",
+    "Equipping Dominus... Error: You are too broke.",
+    "Processing Robux transaction... Just kidding, you have none.",
+    "Waiting for free Admin... It's never coming.",
+    "Checking if you're a bacon hair... Analysis complete.",
+    "Warning: Adopt Me! players detected. Brace for lag.",
+    "Running obby physics... Gravity is optional.",
+    "Your account is under review for 'funny moment' violations.",
+    "Generating map... Watch out for hackers.",
+    "Searching for a fair trade... This may take years.",
+    "Simulating a normal server... Impossible.",
+    "Your internet connection is 0.01 Mbps. Good luck.",
+    "Shutting down for a surprise update... You just lost all progress.",
+    "Spawning in R6 mode... Hope you like stiff animations.",
+    "Purchasing Game Pass... Oh wait, you need money.",
+    "Server message: 'This is your last warning!'",
+    "Patching exploits... Just kidding, hackers already bypassed it.",
+    "Warning: You have been kicked for 'existing too hard'.",
+    "Loading: Your friend was last online 5 years ago.",
+    "This server has been permanently banned by moderation.",
+    "Your username is too cool for this game.",
+    "Connecting to roleplay server... Prepare for cringe.",
+    "This game has been deleted for 'questionable content.'",
+    "Your free VIP server is expiring... Get ready for public chaos.",
+    "HTTP 404: The page you’re looking for is on another server.",
+    "503 Service Unavailable: Server is too busy playing Minesweeper.",
+    "Connection lost... Trying to reconnect... Failing miserably.",
+    "Error 418: I'm a teapot, not a server.",
+    "DNS Error: We don’t know where this page is either.",
+    "502 Bad Gateway: The server is arguing with another server.",
+    "Your request is important to us. Please hold for the next available error message.",
+    "Error 522: Connection timed out. Just like your patience.",
+    "Pinging server... Ping refused to answer.",
+    "403 Forbidden: Access denied. But you weren’t gonna get in anyway.",
+    "Kernel panic detected... Admin has left the chat.",
+    "Database overloaded. Time to delete some data. Your data.",
+    "Your IP has been flagged for excessive refresh attempts.",
+    "Our servers are powered by a hamster wheel... It just stopped spinning.",
+    "Backend systems are currently on vacation. Please try later.",
+    "SQL Error: Expected ‘;’, got ‘crying’.",
+    "Debugging in progress... Wait, we found more bugs.",
+    "Server overheating... Sending ice cubes.",
+    "Your request has been sent to a black hole.",
+    "‘To be or not to be?’ More like, ‘To load or not to load?’",
+    "‘I think, therefore I am... still waiting for this page to load.’",
+    "‘The only thing we have to fear is... a failed internet connection.’",
+    "‘Give me liberty, or give me... a working Wi-Fi signal!’",
+    "‘That's one small step for man, one giant leap for... error 404.’",
+    "‘Houston, we have a loading screen problem.’",
+    "‘You miss 100% of the pages you fail to load.’",
+    "‘Keep your friends close, but your cache closer.’",
+    "‘Ask not what your browser can do for you, ask why it’s taking so long!’",
+    "‘If at first you don’t succeed... refresh and try again.’",
+    "‘Rome wasn’t built in a day, and neither was this webpage.’",
+    "‘With great bandwidth comes great responsibility.’",
+    "‘It is a tale told by an idiot, full of lag and buffering, signifying nothing.’",
+    "‘Do or do not. There is no loading bar.’",
+    "‘All that glitters is not gold, sometimes it's just a loading icon.’",
+    "Generating world... Warning: Too many creepers detected.",
+    "Redstone engineers are still figuring out how this page works...",
+    "Punching trees to generate website data...",
+    "Applying enchantments to your browsing experience...",
+    "Server rebooting... Probably because someone used TNT.",
+    "Loading chunks... Hope you like floating islands!",
+    "Saving world... Hopefully, before your house gets griefed.",
+    "Preparing spawn area... Please don't spawn inside a lava pool.",
+    "Endermen have taken some of the data... Rebuilding...",
+    "Mining code blocks... Found some diamonds!",
+    "Crafting a better experience... Need more wood planks.",
+    "Placing obsidian... This website is now explosion-proof!",
+    "The End is near... But first, this page must load.",
+    "Smelting ideas into functional code...",
+    "Fishing for better load times...",
+    "Notch is watching... Be patient.",
+    "Villager noises intensify... *hmmmm*",
+    "Trying to place a bed in the Nether... Mistakes were made.",
+    "Server lag detected... Blame the Ender Dragon.",
+    "This webpage was built using 64 stacks of cobblestone.",
+    "Building terrain... Hope you like mountains.",
+    "Calculating the square root of lag...",
+    "Factoring primes... Loading should be done before we find them all.",
+    "Solving for X... X = slow loading time.",
+    "Dividing by zero... Uh oh.",
+    "The Fibonacci sequence predicts this page will load... eventually.",
+    "Using calculus to estimate how long this page will take to appear.",
+    "π seconds remaining... That’s infinite, right?",
+    "The limit of this loading bar does not exist.",
+    "Waiting for an integral solution... Or at least a faster Wi-Fi connection.",
+    "Applying the quadratic formula to this lag...",
+    "Testing if loading time is an imaginary number...",
+    "Statistically, this page should load by now.",
+    "Converting lag into a polynomial equation...",
+    "Solving Schrödinger's Page Load: Is it done or not?",
+    "Multiplying patience by infinity...",
+    "Dividing frustration by load time... Still undefined.",
+    "Integrating patience over time...",
+    "Checking if prime numbers affect loading speed...",
+    "Rounding up estimated wait times to the nearest decade...",
+];
+        function updateMessage() {
+            let messageIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById("loading-message").textContent = messages[messageIndex];
+
+            if (timeLeft > 0) {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                setTimeout(updateMessage, 2000);
+            } else {
+                document.getElementById("loading-screen").style.display = "none";
+                document.getElementById("content").style.display = "block";
+            }
+        }
+
+        updateMessage();
+
+        // Like/Dislike Functionality
+        document.querySelectorAll('.reaction-buttons button').forEach(button => {
+            button.addEventListener('click', () => {
+                let countSpan = button.querySelector("span");
+                let count = parseInt(countSpan.textContent);
+                countSpan.textContent = count + 1;
+            });
+        });
+    </script>
+</body>
+</html>
