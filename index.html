@@ -1,177 +1,51 @@
 <!DOCTYPE html>
-<html lang="en-NZ">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Da Civilian Blog</title>
+    <title>Loading...</title>
     <style>
         body {
-            font-family: 'Agency FB';
-            margin: 0;
-            background-color: #c4ec13;
             display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header {
-            background: linear-gradient(to right, red, orange, yellow, green, blue);
-            color: black;
-            padding: 1rem;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            font-family: 'Agency FB';
-        }
-        header nav {
-            display: flex;
-            gap: 1rem;
-        }
-        header nav a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-        .content {
-            background-color: #af9f0d;
-            margin: 2rem auto;
-            padding: 1rem;
-            max-width: 800px;
-            height: 700px; /* Fixed height for uniform size */
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden; /* Prevent content from exceeding the fixed height */
-            text-overflow: ellipsis; /* Adds ellipsis to truncated text */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Align the reaction buttons and content */
-        }
-        .content h2 {
-            color: white;
-            margin-bottom: 1rem; /* Restores spacing below the title */
-        }
-        .content p {
-            margin: 1rem 0; /* Restores spacing above and below the paragraph */
-            font-family: 'Abadi Extra Light';
-            color: white;
-            display: -webkit-box;
-            -webkit-line-clamp: 3; /* Ensures a maximum of 3 lines */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .content img {
-            margin-top: 1rem; /* Restores spacing above the image */
-            max-width: 100%;
-            border-radius: 10px;
-        }
-        .reaction-buttons {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            display: flex;
-            gap: 0.5rem;
-            font-size: 1rem;
-        }
-        .reaction-buttons button {
-            background-color: white;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Agency FB';
-        }
-        .reaction-buttons button:hover {
-            background-color: #ddd;
-        }
-        .reaction-buttons span {
-            margin-left: 0.2rem;
-        }
-        footer {
-            background-color: #125512;
-            color: white;
+            height: 100vh;
+            background-color: black;
+            color: lime;
+            font-family: monospace;
             text-align: center;
-            padding: 1rem;
-            font-family: 'Agency FB';
-            margin-top: auto;
+            flex-direction: column;
+        }
+        #loading-message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div>Da Civilian Blog: where media comes to life</div>
-        <nav>
-            <a href="./index.html">Home</a>
-            <a href="https://nbtf.vercel.app">NBTF</a>
-            <a href="mailto://cbgames.xyz@gmail.com">Contact</a>
-            <a href="./404.html">News</a>
-        </nav>
-    </header>
-
-    <div class="content" data-id="1">
-        <h2>Blog 2 == 9 February 2025</h2>
-        <p><b>I have successfully made it into the facility. Me and my friend have made it to the Core Control of the Nuclear Blast Testing Facility.</b></p>
-        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Core Control Screenshot">
-        <div class="reaction-buttons">
-            <button class="like-button">👍 <span class="like-count">15</span></button>
-            <button class="dislike-button">👎 <span class="dislike-count">2</span></button>
-        </div>
-    </div>
-
-    <div class="content" data-id="2">
-        <h2>Blog 2 == 9 February 2025</h2>
-        <p><b>I have successfully made it into the facility. Me and my friend have made it to the Core Control of the Nuclear Blast Testing Facility.</b></p>
-        <img src="https://res.cloudinary.com/diehyknwd/image/upload/v1732357144/noFilter-ezgif.com-webp-to-jpg-converter_kdepcp.jpg" alt="Core Control Screenshot">
-        <div class="reaction-buttons">
-            <button class="like-button">👍 <span class="like-count">0</span></button>
-            <button class="dislike-button">👎 <span class="dislike-count">0</span></button>
-        </div>
-    </div>
-
-    <footer>
-        <p>Where media comes to Life<br>
-        Nuclear Blast Testing Facility<br>
-        Contact: cbgames.xyz@gmail.com</p>
-    </footer>
-
+    <p id="loading-message">Initializing...</p>
+    <p id="countdown">Redirecting in <span id="timer">12</span> seconds...</p>
     <script>
-        // Initialize reaction counts from localStorage
-        document.querySelectorAll('.content').forEach(content => {
-            const contentId = content.getAttribute('data-id');
-            const likeCountElement = content.querySelector('.like-count');
-            const dislikeCountElement = content.querySelector('.dislike-count');
-            
-            const likeCount = localStorage.getItem(`like-${contentId}`) || 0;
-            const dislikeCount = localStorage.getItem(`dislike-${contentId}`) || 0;
+        // Fixed time before redirection (change to desired time in seconds)
+        let timeLeft = 12; // Change this value to your desired delay
+        const redirectURL = "./blog.html"; // Change this to your actual destination page
 
-            likeCountElement.textContent = likeCount;
-            dislikeCountElement.textContent = dislikeCount;
-        });
+        function updateMessage() {
+            let messageIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById("loading-message").textContent = messages[messageIndex];
 
-        // Add event listeners to buttons
-        document.querySelectorAll('.content').forEach(content => {
-            const contentId = content.getAttribute('data-id');
-            const likeButton = content.querySelector('.like-button');
-            const dislikeButton = content.querySelector('.dislike-button');
-            const likeCountElement = content.querySelector('.like-count');
-            const dislikeCountElement = content.querySelector('.dislike-count');
+            if (timeLeft > 0) {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                setTimeout(updateMessage, 1500); // Update every second
+            } else {
+                window.location.href = redirectURL; // Redirect after countdown
+            }
+        }
 
-            likeButton.addEventListener('click', () => {
-                let likeCount = parseInt(localStorage.getItem(`like-${contentId}`) || 0);
-                likeCount++;
-                localStorage.setItem(`like-${contentId}`, likeCount);
-                likeCountElement.textContent = likeCount;
-            });
-
-            dislikeButton.addEventListener('click', () => {
-                let dislikeCount = parseInt(localStorage.getItem(`dislike-${contentId}`) || 0);
-                dislikeCount++;
-                localStorage.setItem(`dislike-${contentId}`, dislikeCount);
-                dislikeCountElement.textContent = dislikeCount;
-            });
-        });
+        // Start updating messages
+        updateMessage();
     </script>
+<script src="./messages.js"></script>
 </body>
 </html>
